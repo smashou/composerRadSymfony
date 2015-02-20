@@ -1,0 +1,15 @@
+install:
+    - sudo a2ensite symfony2
+    - sudo service apache2 start
+    - SYMFONY_ENV=prod composer install --no-dev --optimize-autoloader -v --prefer-dist
+    - ./bin/install -e=prod
+    - sed -i "s/AppKernel('prod', false);/AppKernel('prod', true);/" web/app.php
+    - sed -i "12,18d" web/app_dev.php
+
+    - sudo chmod 777 -R /var/log/apache2
+    - ln -sf /var/log/apache2/* /home/human/src/web
+
+    # provide access to symfony logs
+    - touch app/logs/prod.log
+    - touch app/logs/dev.log
+    - ln -sf /home/human/src/app/logs/* /home/human/src/web
