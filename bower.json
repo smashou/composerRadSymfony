@@ -1,0 +1,11 @@
+{
+  "name": "rad-bundle",
+  "private": true,
+  "dependencies": {
+    "bootstrap-sass-official": "latest",
+    "font-awesome": "4.1.*"
+  },
+  "devDependencies": {
+    "grunt-contrib-watch": "~0.6.1"
+  }
+}
