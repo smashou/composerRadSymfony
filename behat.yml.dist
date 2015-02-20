@@ -1,0 +1,32 @@
+default:
+    autoload:
+        'Context': %paths.base%/features/Context
+        'Page': %paths.base%/features
+    suites:
+        default:
+            path: %paths.base%/features
+            contexts:
+                - Context\FeatureContext
+                - Context\MinkContext
+                - Knp\FriendlyContexts\Context\EntityContext
+                - Knp\FriendlyContexts\Context\PageContext
+                - Knp\FriendlyContexts\Context\TableContext
+                - Knp\FriendlyContexts\Context\AliceContext
+    extensions:
+        Behat\MinkExtension\ServiceContainer\MinkExtension:
+            base_url:           'http://localhost:8000/app_test.php'
+            sessions:
+                default:
+                    goutte:     ~
+                javascript:
+                    selenium2:  ~
+            default_session:    default
+            javascript_session: javascript
+            show_cmd:           firefox %s
+        Knp\FriendlyContexts\Extension:
+            alice:
+                fixtures:
+                    Sample: %paths.base%/src/AppBundle/Resources/fixtures/orm/sample.yml
+            smartTag: smartStep
+            page:
+                namespace: "Page"
